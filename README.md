@@ -1,66 +1,67 @@
-# **Credit Card Fraud Detection (Anomaly Detection)**
+# Credit Card Fraud Detection (Anomaly Detection)
 
-## **Project Overview**
+## Problem Statement
 
-This project focuses on detecting fraudulent transactions in a highly imbalanced credit card dataset. Given that fraud cases are rare, anomaly detection techniques and ensemble learning methods are used to improve classification performance while minimizing false positives.
+Detect fraudulent transactions in credit card data using machine learning techniques while handling class imbalance.
 
-## **Problem Statement**
+## Dataset
 
-The goal is to develop a robust machine learning model that can accurately distinguish between fraudulent and legitimate transactions based on transaction features.
+The dataset is sourced from **[Kaggle - Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)**.
 
-## **Dataset**
+### How to Get the Dataset
 
-- The dataset contains **284,807 transactions**, with only **492 fraud cases (0.172%)**, making it highly imbalanced.
-- Features are numerical and anonymized (V1, V2, ..., V28) due to confidentiality.
-- The dataset includes **Time**, **Amount**, and a target label (**0: Not Fraud, 1: Fraud**).
+Since the dataset is too large to upload to GitHub, follow these steps:
 
-## **Approach & Methodology**
+1. Download the dataset manually from the [Kaggle link](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud).
+2. Extract the `creditcard.csv` file and place it in the project directory.
 
-### **1. Data Exploration & Preprocessing**
+## Project Overview
 
-- Handled class imbalance using **undersampling/oversampling techniques**.
-- Scaled features using **StandardScaler** to improve model convergence.
-- Explored feature distributions to identify patterns in fraudulent transactions.
+This project builds an ensemble model combining **Random Forest** and **XGBoost** to improve fraud detection. It follows these steps:
 
-### **2. Model Training & Evaluation**
+- **Importing Libraries**: Load essential Python libraries for data processing, visualization, and modeling.
+- **Load Data**: Read and inspect the dataset.
+- **Exploratory Data Analysis (EDA)**:
+  - Visualize feature distributions.
+  - Identify class imbalance in fraud vs. non-fraud transactions.
+- **Data Preprocessing**:
+  - Scale numerical features.
+  - Handle imbalanced data using **undersampling/oversampling**.
+- **Train Supervised Learning Models**:
+  - **Random Forest**
+  - **XGBoost**
+- **Ensemble Model (XGBoost + Random Forest)**:
+  - Combine models using **StackingClassifier** with a **Logistic Regression** meta-learner.
+- **Evaluation**:
+  - Classification report (Precision, Recall, F1-score).
+  - **ROC-AUC Score** to measure performance.
 
-- Implemented multiple supervised models:
-  - **Logistic Regression**
-  - **Random Forest Classifier**
-  - **XGBoost Classifier**
-  - **Stacking Classifier (Random Forest + XGBoost with Logistic Regression as meta-classifier)**
-- Evaluated models using:
-  - **Precision, Recall, F1-score** (to assess fraud detection capability)
-  - **ROC-AUC Score** (to measure model discrimination power)
+## Results
 
-### **3. Ensemble Learning**
+The ensemble model achieves an **ROC-AUC score of 0.93**, significantly improving fraud detection while maintaining high precision and recall.
 
-- Combined **Random Forest** and **XGBoost** in a stacking classifier for better fraud detection.
-- Optimized decision threshold to **minimize false negatives while maintaining a low false positive rate**.
+## How to Run
 
-## **Results & Key Findings**
-
-- **Stacking Classifier (RF + XGBoost + Logistic Regression)** achieved the best results:
-  - **ROC-AUC Score: \~0.93**
-  - **F1-score for Fraud: \~0.85** (improved recall & precision)
-- Lowered false negatives, ensuring fraudulent transactions are caught effectively.
-
-## **Future Improvements**
-
-- Experiment with **autoencoders and deep learning** for anomaly detection.
-- Implement **real-time fraud detection system**.
-- Explore **cost-sensitive learning** to better balance fraud detection with minimal business disruption.
-
-## **How to Run the Notebook**
-
-1. Install required libraries:
+1. Install dependencies:
    ```bash
-   pip install numpy pandas scikit-learn xgboost matplotlib seaborn
+   pip install -r requirements.txt
    ```
-2. Run `fraud_detection.ipynb` in Jupyter Notebook.
-3. Train the model and evaluate results.
+2. Run the Jupyter Notebook:
+   ```bash
+   jupyter notebook
+   ```
+3. Open `fraud_detection.ipynb` and execute the cells step by step.
 
-## **Conclusion**
+## Requirements
 
-This project demonstrates how **ensemble learning and anomaly detection** techniques can significantly improve fraud detection in highly imbalanced datasets. The stacking classifier approach proved effective in **reducing false negatives** while maintaining high overall accuracy.
+Ensure you have the following libraries installed:
+
+```bash
+pip install pandas numpy matplotlib seaborn scikit-learn xgboost
+```
+
+## License
+
+This project is for educational purposes only. Dataset credits go to the original authors on Kaggle.
+
 
